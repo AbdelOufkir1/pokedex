@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import  axios from 'axios';
 
 
@@ -12,6 +13,15 @@ class App extends Component {
                     number: '001',
       }, ]
     }
+
+import Header from './components/header'
+
+class App extends Component {
+  render() {
+    return (
+     <Header />
+    );
+
   }
 componentDidMount(){
 this.pagination()
