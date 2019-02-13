@@ -6,7 +6,7 @@ import Button from './components/button'
 import Pokelist from './components/pokelist'
 
 
-iclass App extends Component {
+class App extends Component {
   constructor (props) {
     super (props)
 
@@ -16,11 +16,37 @@ iclass App extends Component {
   }
 
   updateState = (arr) => { 
+    
     this.setState({
-      pokemon: (this.pokemon || []).concat(arr)
+      pokemon: (this.state.pokemon || []).concat(arr)
     })
   }
   
+ loadMore=()=>{
+   console.log('hello world')
+   const next = this.state.pokemon.length + 1
+   console.log(next)
+  return axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${next}&limit=20`)
+  .then((response)=>{
+  
+    const pokeArray = response.data.results;
+    const newArr = [];
+    
+    // console.log(pokeArray)
+      pokeArray.map( (e, idx)=>{
+
+      newArr.push({
+            name: e.name, 
+            icon: `https://img.pokemondb.net/sprites/sun-moon/icon/${e.name}.png`,
+            id : next+idx
+      })
+ })
+ this.updateState(newArr)
+
+})
+}
+
+
   pagination(){
 
     return axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20')
@@ -40,16 +66,25 @@ iclass App extends Component {
         })
 
         this.updateState(newArr)
-        console.log(this.state.pokemon.length)
+        // console.log(this.state.pokemon.length)
         
       })
   }
   
   componentDidMount() {
-    this.pagination();
+    this.pagination().then( ()=>{   console.log(this.state.pokemon)
+    });
   }
 
-  
+  componentDidUpdate(prevState, prevProps){
+
+     console.log('updated',prevState)
+     console.log('stateNow',this.state)
+
+
+  }
+
+
   render() {
     return (
       <>
@@ -61,7 +96,7 @@ iclass App extends Component {
             return <Card key={i} pokeData={e} /> 
           })
         }            
-      <Button />
+      <Button loadMorePoke={this.loadMore}/>
       </div>     
      </>
     );
