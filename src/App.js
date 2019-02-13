@@ -13,6 +13,12 @@ class App extends Component {
       pokemon: [],
     }
   }
+
+  updateState = (arr) => { 
+    this.setState({
+      pokemon: (this.pokemon || []).concat(arr)
+    })
+  }
   
   pagination(){
 
@@ -21,7 +27,8 @@ class App extends Component {
       
         const pokeArray = response.data.results;
         const newArr = [];
-  
+        
+        // console.log(pokeArray)
         pokeArray.map( (e, idx)=>{
   
           newArr.push({
@@ -30,17 +37,18 @@ class App extends Component {
                 id : String(idx)
           })
         })
-        this.setState({
-          pokemon: [].concat(newArr)
-        })
+
+        this.updateState(newArr)
+        console.log(this.state.pokemon.length)
+        
       })
   }
   
-
   componentDidMount() {
     this.pagination();
   }
 
+  
   render() {
     return (
       <>
