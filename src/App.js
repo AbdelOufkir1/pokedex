@@ -5,7 +5,8 @@ import Card from './components/card';
 import Button from './components/button'
 import Pokelist from './components/pokelist'
 
-class App extends Component {
+
+iclass App extends Component {
   constructor (props) {
     super (props)
 
