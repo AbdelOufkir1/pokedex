@@ -1,10 +1,10 @@
 import React from 'react'
-import './card.css'
+// import './card.css'
 
 const Card = (props) => {
         return (
             <>                
-             <div className="card">
+             <div className="card" onClick={e=>props.profile(props.pokeData.name)}>
                 <div className="holder">
                     <div className="col col-3">
                        <img src={props.pokeData.icon} alt="" /> 

@@ -3,7 +3,8 @@ import axios from 'axios';
 import Header from './components/header';
 import Card from './components/card';
 import Button from './components/button'
-import Pokelist from './components/pokelist'
+// import Pokelist from './components/pokelist'
+// import toProfile from './components/profile'
 
 
 class App extends Component {
@@ -38,13 +39,15 @@ class App extends Component {
       newArr.push({
             name: e.name, 
             icon: `https://img.pokemondb.net/sprites/sun-moon/icon/${e.name}.png`,
-            id : next+idx
+            id : next+idx + 1
       })
  })
  this.updateState(newArr)
 
 })
 }
+
+
 
 
   pagination(){
@@ -61,7 +64,7 @@ class App extends Component {
           newArr.push({
                 name: e.name, 
                 icon: `https://img.pokemondb.net/sprites/sun-moon/icon/${e.name}.png`,
-                id : String(idx)
+                id : idx + 1
           })
         })
 
@@ -71,6 +74,23 @@ class App extends Component {
       })
   }
   
+  toProfile=(name)=>{
+    console.log(name)
+    return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    .then((response)=>{
+  
+  console.log(response)
+  
+    })
+    
+  
+  
+  
+  }
+
+
+
+
   componentDidMount() {
     this.pagination().then( ()=>{   console.log(this.state.pokemon)
     });
@@ -93,7 +113,7 @@ class App extends Component {
       
         {
           this.state.pokemon.map((e,i) => {
-            return <Card key={i} pokeData={e} /> 
+            return <Card key={i} pokeData={e} profile={this.toProfile} /> 
           })
         }            
       <Button loadMorePoke={this.loadMore}/>
