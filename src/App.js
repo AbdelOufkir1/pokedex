@@ -1,55 +1,71 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import Header from './components/header';
+import Card from './components/card';
+import Button from './components/button'
+import Pokelist from './components/pokelist'
 
-import  axios from 'axios';
 
+iclass App extends Component {
+  constructor (props) {
+    super (props)
 
-class App extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-       pokemon : [ 
-         {          name : 'pikachu',
-                    image: 'www.pika.com',
-                    number: '001',
-      }, ]
+    this.state ={
+      pokemon: [],
     }
-
-import Header from './components/header'
-
-class App extends Component {
-  render() {
-    return (
-     <Header />
-    );
-
   }
-componentDidMount(){
-this.pagination()
 
-
-}
-
-
-  pagination(){
-     return axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20')
-     .then((response)=>{
-
-      // console.log(response)
-      this.setState({
-          pokemon : response.data.results,
-
-      })
-    console.log(this.state.pokemon)
-
-
-     })
+  updateState = (arr) => { 
+    this.setState({
+      pokemon: (this.pokemon || []).concat(arr)
+    })
   }
   
-    render() {
-      return (
-       <h1> Hello Pokedex Pagess </h1>
-      );
-    }
+  pagination(){
+
+    return axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20')
+      .then((response)=>{
+      
+        const pokeArray = response.data.results;
+        const newArr = [];
+        
+        // console.log(pokeArray)
+        pokeArray.map( (e, idx)=>{
+  
+          newArr.push({
+                name: e.name, 
+                icon: `https://img.pokemondb.net/sprites/sun-moon/icon/${e.name}.png`,
+                id : String(idx)
+          })
+        })
+
+        this.updateState(newArr)
+        console.log(this.state.pokemon.length)
+        
+      })
   }
+  
+  componentDidMount() {
+    this.pagination();
+  }
+
+  
+  render() {
+    return (
+      <>
+      < Header />
+      <div className="container">
+      
+        {
+          this.state.pokemon.map((e,i) => {
+            return <Card key={i} pokeData={e} /> 
+          })
+        }            
+      <Button />
+      </div>     
+     </>
+    );
+  }
+}
 
 export default App;

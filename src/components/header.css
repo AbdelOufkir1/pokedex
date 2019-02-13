@@ -1,4 +1,8 @@
 
+.pokeHeader{
+    height: 200px;
+}
+
 .poke {
     height: 15%;
     margin: 10px 50px

@@ -1,0 +1,14 @@
+.card {
+    border: black dotted 1px;
+    margin: 5px;
+}
+
+.holder {
+    display: flex;
+}
+
+.card:hover {
+    background-color: red;
+    transform: scale(1.2);
+    font-size: x-large;
+}
