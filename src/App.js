@@ -1,105 +1,124 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './App.css';
 import Header from './components/header';
 import Card from './components/card';
-import Button from './components/button'
-// import Pokelist from './components/pokelist'
-// import toProfile from './components/profile'
+import Button from './components/button';
+import Pokelist from './components/pokelist';
+import Footer from './components/footer';
+// import toProfile from './components/profile';
 
 
 class App extends Component {
-  constructor (props) {
-    super (props)
+  constructor(props) {
+    super(props)
 
-    this.state ={
+    this.state = {
       pokemon: [],
+      searchbar: Pokelist,
+      display: [],
     }
   }
 
-  updateState = (arr) => { 
-    
+  updateState = (arr) => {
+
     this.setState({
       pokemon: (this.state.pokemon || []).concat(arr)
     })
   }
-  
- loadMore=()=>{
-   console.log('hello world')
-   const next = this.state.pokemon.length + 1
-   console.log(next)
-  return axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${next}&limit=20`)
-  .then((response)=>{
-  
-    const pokeArray = response.data.results;
-    const newArr = [];
-    
-    // console.log(pokeArray)
-      pokeArray.map( (e, idx)=>{
 
-      newArr.push({
-            name: e.name, 
-            icon: `https://img.pokemondb.net/sprites/sun-moon/icon/${e.name}.png`,
-            id : next+idx + 1
-      })
- })
- this.updateState(newArr)
+  loadMore = () => {
+    console.log('hello world')
+    const next = this.state.pokemon.length + 1
+    console.log(next)
+    return axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${next}&limit=20`)
+      .then((response) => {
 
-})
-}
-
-
-
-
-  pagination(){
-
-    return axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20')
-      .then((response)=>{
-      
         const pokeArray = response.data.results;
         const newArr = [];
-        
+
         // console.log(pokeArray)
-        pokeArray.map( (e, idx)=>{
-  
+        pokeArray.map((e, idx) => {
+
           newArr.push({
-                name: e.name, 
-                icon: `https://img.pokemondb.net/sprites/sun-moon/icon/${e.name}.png`,
-                id : idx + 1
+            name: e.name,
+            icon: `https://img.pokemondb.net/sprites/sun-moon/icon/${e.name}.png`,
+            id: next + idx + 1
+          })
+        })
+        this.updateState(newArr)
+
+      })
+  }
+
+
+
+
+  pagination() {
+
+    return axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20')
+      .then((response) => {
+
+        const pokeArray = response.data.results;
+        const newArr = [];
+
+        // console.log(pokeArray)
+        pokeArray.map((e, idx) => {
+
+          newArr.push({
+            name: e.name,
+            icon: `https://img.pokemondb.net/sprites/sun-moon/icon/${e.name}.png`,
+            id: idx + 1
           })
         })
 
         this.updateState(newArr)
         // console.log(this.state.pokemon.length)
-        
+
       })
   }
-  
-  toProfile=(name)=>{
+
+  toProfile = (name) => {
     console.log(name)
     return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    .then((response)=>{
-  
-  console.log(response)
-  
-    })
-    
-  
-  
-  
+      .then((response) => {
+
+        console.log(response)
+
+      })
+
+
+
+
+  }
+
+  handletyping = (e) => {
+    const type = e.target.value;
+    const filterPokeList = (list) => {
+      const results = this.state.searchbar.filter(searchbar => searchbar.toLowerCase().includes(list)) //the e is the list
+      this.setState({ display: results })
+    }
+    if (type.length === 0) {
+      this.setState({ display: [] })
+    }
+    else {
+      filterPokeList(type)
+    }
   }
 
 
 
 
   componentDidMount() {
-    this.pagination().then( ()=>{   console.log(this.state.pokemon)
+    this.pagination().then(() => {
+      console.log(this.state.pokemon)
     });
   }
 
-  componentDidUpdate(prevState, prevProps){
+  componentDidUpdate(prevState, prevProps) {
 
-     console.log('updated',prevState)
-     console.log('stateNow',this.state)
+    console.log('updated', prevState)
+    console.log('stateNow', this.state)
 
 
   }
@@ -108,17 +127,31 @@ class App extends Component {
   render() {
     return (
       <>
-      < Header />
-      <div className="container">
-      
-        {
-          this.state.pokemon.map((e,i) => {
-            return <Card key={i} pokeData={e} profile={this.toProfile} /> 
-          })
-        }            
-      <Button loadMorePoke={this.loadMore}/>
-      </div>     
-     </>
+      <div className="container-fluid backgroundColor">
+        <Header onChange={this.handletyping} />
+        <div className="row">
+          <div className="col"></div>
+          <div className="col">
+            <div className="container searchDisplay">
+              {this.state.display.slice(0,5).map((e, i) => {
+                return <p profile={this.toProfile}>{e}</p>
+              })
+              }
+            </div>
+          </div>
+          <div className="col"></div>
+        </div>
+        <div className="container">
+          {
+            this.state.pokemon.map((e, i) => {
+              return <Card key={i} pokeData={e} profile={this.toProfile} />
+            })
+          }
+          <Button loadMorePoke={this.loadMore} />
+        </div>
+        <Footer />
+        </div>
+      </>
     );
   }
 }
