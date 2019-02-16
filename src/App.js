@@ -4,6 +4,7 @@ import Header from './components/header';
 import Card from './components/card';
 import Button from './components/button'
 import Profile from './components/profile'
+
 // import Pokelist from './components/pokelist'
 // import toProfile from './components/profile'
 
@@ -17,6 +18,7 @@ class App extends Component {
       view: false,
       pokemonProfile : [{'name': 'name'}],
       pokemonChosenIdx : 0,
+      show: false,
     }
   }
 
@@ -153,15 +155,15 @@ class App extends Component {
   
   
   
-    
-toggleMode=()=>{
 
-  console.log('aaaa')
-  this.setState({
-      view : !this.state.view,
-
-  })
-}
+          showModal = () => {
+            this.setState({ show: true });
+          };
+        
+          hideModal = () => {
+            this.setState({ show: false });
+          };
+        
 
 
 
@@ -206,8 +208,11 @@ toggleMode=()=>{
          { this.state.view === false ? this.state.pokemon.map((e,i) => {
             return <Card key={i} pokeData={e} profile={this.toProfile} /> 
     
-            })  : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]}/>
-        }       
+            })  : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState ={this.state.show} show={this.showModal} hide={this.hideModal}  />
+        }    
+
+
+
         {/* {this.state.view === 1 ?   :  this.state.pokemon.map((e,i) => {
             return <Card key={i} pokeData={e} profile={this.toProfile} /> 
     
