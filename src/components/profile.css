@@ -1,20 +1,24 @@
-/*.scrolling-wrapper-flexbox{
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-
+.backgroundColor{
+    background-color: #8a0000;
 }
 
-    .card {
-        flex: 0 0 auto;
-    }*/
+div.scrollmenu {
+    background-color: white;
+    overflow: auto;
+    white-space: nowrap;
+  }
 
-    .scrolling-wrapper{
-        overflow-x: scroll;
-        overflow-y: hidden;
-        /* width: 50px; */
-        
-    }
+  div.scrollmenu button {
+    background-color: purple;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    margin: 10px;
+  }
 
-    
-   
+  
+  div.scrollmenu button:hover {
+    background-color: #777;
+  }

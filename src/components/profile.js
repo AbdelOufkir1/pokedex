@@ -1,24 +1,22 @@
 import React from 'react';
 import './profile.css';
-import Modal from './modal';
+// import  showModal from './modal';
+import ModalExample from './modal'
 
 
 const Profile=(props)=>{
 console.log('propsShow',props.showState)
 console.log('img needed',props.pokemonClicked.profilePic)
-console.log('right one', typeof props.pokemonClicked.moves)
-
-  return  <>
-           
-            <div >
+console.log('right one',  props.pokemonClicked.moves)
+console.log('model', props.modal)
+  return   <div>
                 {
                     props.pokemonClicked.moves.map((e,i )=>{
-                        return <button className="scrolling-wrapper">{e[0]}</button>
+                        return <ModalExample name={e[0]} url={e[1]} key={i}/>
                     })
                 }
-            </div>
-           
-        </>
+           </div>
+        
     //  return <button onClick={()=><Modal />}>{props.pokemonClicked.name} </button>
 
 
@@ -30,7 +28,7 @@ console.log('right one', typeof props.pokemonClicked.moves)
 
 
 
-export default Profile
+export default Profile;
 
 
 
