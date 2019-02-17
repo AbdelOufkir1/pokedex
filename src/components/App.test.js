@@ -16,7 +16,7 @@ class App extends Component {
     this.state ={
       pokemon: [],
       view: false,
-      pokemonProfile : [],
+      pokemonProfile : [{'name': 'name'}],
       pokemonChosenIdx : 0,
       show: false,
     }
@@ -109,27 +109,18 @@ class App extends Component {
                          return {
                             statName : e.stat.name,
                             baseStat : e.base_stat,
-                         }
-                         
+
+                          }
 
                       }),
 
-                      /*moveName : pokemonData.moves.map(e=>{
-                        return [
-                          e.move.name,
-                        ]
-
-                      }),
-                      moveUrl : pokemonData.moves.map(e=>{
-                        return [
-                          e.move.url,
-                        ]
-
-                      }),*/
                       moves : pokemonData.moves.map(e=>{
-                        return [
-                          e.move.name, e.move.url,
-                        ]
+                        return {
+                          moveName : e.move.name,
+                          moveUrl : e.move.url,
+
+
+                        }
 
                       })
 
@@ -161,7 +152,8 @@ class App extends Component {
     
   
     
-        
+  
+  
   
 
           showModal = () => {

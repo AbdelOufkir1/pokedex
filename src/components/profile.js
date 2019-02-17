@@ -1,47 +1,36 @@
 import React from 'react';
 import './profile.css';
+import Modal from './modal';
+
+
+const Profile=(props)=>{
+console.log('propsShow',props.showState)
+console.log('img needed',props.pokemonClicked.profilePic)
+console.log('right one', typeof props.pokemonClicked.moves)
+
+  return  <>
+           
+            <div >
+                {
+                    props.pokemonClicked.moves.map((e,i )=>{
+                        return <button className="scrolling-wrapper">{e[0]}</button>
+                    })
+                }
+            </div>
+           
+        </>
+    //  return <button onClick={()=><Modal />}>{props.pokemonClicked.name} </button>
 
 
 
-class profile extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            pokemonProfile : [{
-                name: 'charmander',
-
-                sprites:{
-                back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/4.png",
-                back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/4.png",
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/4.png",
-
-                },
-
-                types : types.types.name
-
-
-                
-                
-               
-        }
-    }
-        
-
-render(){
-        return (
-         <h1>hello world</h1>
-
-
-
-                )
+    
+}
 
 
 
 
-        }
 
-    }
+export default Profile
 
 
 
