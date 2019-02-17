@@ -255,9 +255,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './components/header';
 import Card from './components/card';
-import Button from './components/button'
-import Profile from './components/profile'
-import Modal from './components/modal'
+import { Button } from './components/button';
+import HomeButton from './components/homeButton';
+import Profile from './components/profile';
+import Modal from './components/modal';
+import { Container } from 'reactstrap';
 
 // import Pokelist from './components/pokelist'
 // import toProfile from './components/profile'
@@ -275,6 +277,8 @@ class App extends Component {
       show: false,
       modal: false,
     }
+
+    this.homeLink = this.homeLink.bind(this);
   }
 
   updateState = (arr) => { 
@@ -423,8 +427,18 @@ class App extends Component {
             this.setState({ show: false });
           };
         
+          homeLink=()=>{
+            console.log('we outta here')
+            this.setState({
+              view : false,
+            },()=>console.log('homeState',this.state.view))
 
+          }
 
+test=()=>{
+  console.log('please work')
+}
+  
 
   componentDidMount() {
     this.pagination().then( ()=>{   console.log(this.state.pokemon)
@@ -441,11 +455,7 @@ class App extends Component {
 
 
 
-  componentDidUpdate(prev,now){
-
-    console.log('prev', prev)
-    console.log('now', now)
-  }
+  
 
   render() {
   console.log(this.state)
@@ -462,22 +472,25 @@ class App extends Component {
     
     return (
       <>
-      < Header />
-      <div className="container">
-      
-        {/* {  
-              
-          this.state.pokemon.map((e,i) => {
-            return <Card key={i} pokeData={e} profile={this.toProfile} /> 
+      <Header />
+      <Container>
+        {this.state.view===true ? <HomeButton test={this.homeLink} /> : null}
     
-            })} */}
-
          { this.state.view === false ? this.state.pokemon.map((e,i) => {
             return <Card key={i} pokeData={e} profile={this.toProfile} /> 
     
-            })  : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState = {this.state.show} modal={this.modal}  />
+            })  : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState = {this.state.show} modal={this.modal} home={this.homeLink}  />
         }    
+               
 
+
+       
+
+{/* //   <div>
+//         <button type="button" className='homeLink' onClick={this.test}>Home</button>
+//         <section>>></section>
+//         <a >pokename</a></div> 
+// } */}
 
 
         {
@@ -485,7 +498,7 @@ class App extends Component {
         }
 
       <Button loadMorePoke={this.loadMore}/>
-      </div>     
+      </Container>
      </>
     );
   }

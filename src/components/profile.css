@@ -12,6 +12,11 @@ profile{
   white-space: nowrap;
 }
 
+.homeLink{
+  margin-left: 25px;
+  margin-right: 5px;
+}
+
 div.scrollmenu {
     background-color: white;
     overflow: auto;

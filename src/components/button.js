@@ -11,4 +11,15 @@ const Button = (props) => {
     )
 }
 
-export default Button;
+const HomeButton = (props) => {
+console.log(props.home)
+    return (
+        <div>
+        <button type="button" className='homeLink' onClick={props.homeNow}>Home</button>
+        <section>>></section>
+        <a >pokename</a></div>
+        
+    )
+}
+
+export { Button, HomeButton };
