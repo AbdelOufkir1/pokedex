@@ -4,9 +4,9 @@ const HomeButton = (props) => {
     console.log(props.home)
         return (
             <div>
-            <button type="button" className='homeLink' onClick={props.test}>Home</button>
+            <button type="button" className='homeLink' onClick={props.function}>Home</button>
             <span>>></span>
-            <span>pokename</span></div>
+            <span>{props.name}</span></div>
             
         )
     }

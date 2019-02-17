@@ -9,7 +9,7 @@
     height: 100px;
     padding: 5px;
     border: 1px solid blue; 
-    background-color: yellow; 
+    /* background-color: yellow;  */
   }
 
 
@@ -21,4 +21,9 @@
 
   }
 
+  .edit{
+
+    text-align: center;
+    letter-spacing: .5px;
+  }
   

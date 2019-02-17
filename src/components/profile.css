@@ -1,5 +1,5 @@
 .backgroundColor{
-    background-color: #8a0000;
+    /* background-color: #8a0000; */
 }
 
 profile{
@@ -7,7 +7,6 @@ profile{
   width: 100px;
   height: 100px;
   padding: 5px;
-  border: 1px solid blue; 
   overflow: auto;
   white-space: nowrap;
 }
@@ -18,15 +17,14 @@ profile{
 }
 
 div.scrollmenu {
-    background-color: white;
+    /* background-color: white; */
     overflow: auto;
     white-space: nowrap;
   }
 
   div.scrollmenu button {
-    background-color: purple;
     display: inline-block;
-    color: white;
+    /* color: white; */
     text-align: center;
     padding: 14px;
     text-decoration: none;
@@ -35,5 +33,19 @@ div.scrollmenu {
 
   
   div.scrollmenu button:hover {
-    background-color: #777;
+    /* background-color: #777; */
   }
+
+  .goRight{
+    letter-spacing: .5em;
+    font-size: 30px;
+}
+.withMargin{
+    height: 33%;
+}
+.btn{
+    margin: 10px;
+}
+.close{
+    margin:.5px;
+}

@@ -255,7 +255,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './components/header';
 import Card from './components/card';
-import { Button } from './components/button';
+import Button  from './components/button';
 import HomeButton from './components/homeButton';
 import Profile from './components/profile';
 import Modal from './components/modal';
@@ -365,11 +365,11 @@ class App extends Component {
                       })],
 
                       stats : pokemonData.stats.map(e=>{
-                         return {
-                            statName : e.stat.name,
-                            baseStat : e.base_stat,
+                         return [
+                            e.stat.name,
+                            e.base_stat,
 
-                          }
+                         ]
 
                       }),
 
@@ -474,12 +474,12 @@ test=()=>{
       <>
       <Header />
       <Container>
-        {this.state.view===true ? <HomeButton test={this.homeLink} /> : null}
+        {/* {this.state.view===true ? <HomeButton test={this.homeLink} /> : null} */}
     
          { this.state.view === false ? this.state.pokemon.map((e,i) => {
             return <Card key={i} pokeData={e} profile={this.toProfile} /> 
     
-            })  : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState = {this.state.show} modal={this.modal} home={this.homeLink}  />
+            })  : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState = {this.state.show} modal={this.modal} click={this.homeLink}  />
         }    
                
 

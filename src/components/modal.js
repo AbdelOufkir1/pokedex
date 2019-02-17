@@ -50,14 +50,14 @@ class ModalExample extends React.Component {
       
     return (
     <>
-        <Button color='danger' className='profile' onClick={e=>this.toggle(this.props.url)}>{this.props.name}</Button>
+        <Button color='clear' className=' btn btn-outline-secondary' onClick={e=>this.toggle(this.props.url)}>{this.props.name}</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}></ModalHeader>
           <ModalBody>
-              <h2>{this.state.name}</h2>
-              <h2>type : {this.state.type}</h2>
-              <h2>power: {this.state.power}</h2>
-              <h2>pp   :{this.state.pp}</h2>
+              <h2 className='edit'>{this.state.name.toUpperCase()}</h2>
+              <h2 className='edit'>Type : {this.state.type.charAt(0).toUpperCase() + this.state.type.slice(1)}</h2>
+              <h2 className='edit'>Power: {!this.state.power ? 0: this.state.power }</h2>
+              <h2 className='edit'>PP   : {this.state.pp}</h2>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
