@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios'
+import './modal.css'
 
 
 class ModalExample extends React.Component {
@@ -18,7 +19,9 @@ class ModalExample extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
-  toggle(e, url) {
+  toggle( url) {
+
+    if(this.state.modal === false){
       axios.get(`${url}`).then((response)=>{
         console.log(response)
         console.log(url)
@@ -31,18 +34,25 @@ class ModalExample extends React.Component {
       
       
           })
-      }).catch(e=>console.log)
-   
+      }).catch(e=>console.log(e))
+    }
+    else{
+        this.setState({
+            modal: false
+        })
+    }
   }
 
+  
  
 
   render() {
+      
     return (
-      <div>
-        <Button color="danger" onClick={e=>this.toggle(e, this.props.url)}>{this.props.name}</Button>
+    <>
+        <Button color='danger' className='profile' onClick={e=>this.toggle(this.props.url)}>{this.props.name}</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.exit}></ModalHeader>
+          <ModalHeader toggle={this.toggle}></ModalHeader>
           <ModalBody>
               <h2>{this.state.name}</h2>
               <h2>type : {this.state.type}</h2>
@@ -54,7 +64,7 @@ class ModalExample extends React.Component {
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
-      </div>
+        </>
     );
   }
 }

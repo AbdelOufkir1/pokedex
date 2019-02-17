@@ -2,6 +2,16 @@
     background-color: #8a0000;
 }
 
+profile{
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid blue; 
+  overflow: auto;
+  white-space: nowrap;
+}
+
 div.scrollmenu {
     background-color: white;
     overflow: auto;
