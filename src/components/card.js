@@ -1,5 +1,6 @@
 import React from 'react'
 import './card.css'
+import Buttons from './button'
 
 const Card = (props) => {
         return (
@@ -16,7 +17,7 @@ const Card = (props) => {
                         # {props.pokeData.id}  
                    </div>
                 </div>
-             </div>    
+             </div>
             </>
         )
     }

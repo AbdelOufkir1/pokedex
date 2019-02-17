@@ -1,52 +1,25 @@
 import React from 'react';
 import './profile.css';
+import ModalExample from './modal';
+import HomeButton from './homeButton';
 
 
-
-class profile extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            pokemonProfile : [{
-                name: 'charmander',
-
-                sprites:{
-                back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/4.png",
-                back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/4.png",
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/4.png",
-
-                },
-
-                types : types.types.name
-
-
-                
-                
-               
-        }
-    }
+    
         
 
-render(){
-        return (
-         <h1>hello world</h1>
+const Profile=(props)=>{
 
+    return     <div >
+                {
+                    props.pokemonClicked.moves.map((e,i )=>{
+                        return <ModalExample name={e[0]} url={e[1]} key={i}/>
+                    })
+                }
+        
+        </div>
+           
 
+}
 
-                )
-
-
-
-
-        }
-
-    }
-
-
-
-
-
-
-
+export default Profile;
 

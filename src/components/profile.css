@@ -1,0 +1,30 @@
+
+  profile{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    border: 1px solid blue; 
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  div.scrollmenu {
+    background-color: white;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+  div.scrollmenu button {
+    background-color: purple;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    margin: 10px;
+  }
+
+  div.scrollmenu button:hover {
+    background-color: #777;
+  } 

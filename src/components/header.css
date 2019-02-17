@@ -1,7 +1,12 @@
 
+.colMax{
+  width: 33%;
+}
+
 .headerBackground {
     background-image: url('../assets/headerImage.png');
     height: 200px;
+    margin-bottom: 20px;
 }
 
 .pokeHeader{
