@@ -281,6 +281,13 @@ class App extends Component {
     this.homeLink = this.homeLink.bind(this);
   }
 
+
+
+
+
+
+
+
   updateState = (arr) => { 
     
     this.setState({
@@ -344,8 +351,16 @@ class App extends Component {
         console.log(name)
         return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
             .then((response)=>{
-                  console.log('this is response',response)
-                  const pokemonData = response.data
+              const pokemonData = response.data
+
+                  console.log('this is response',response.data.sprites.back_female)
+                  const spritesKeys = Object.keys(pokemonData.sprites)
+                  const spritesList = spritesKeys.map((e,i)=>{
+                      return { name : `${e}` , 
+                                 url : `${response.data.sprites[e]}` }
+
+                  })
+                    console.log('spriteslist',spritesList)
                   profileArr.push(
                       { name: response.data.name,
                         id:  response.data.id,
@@ -353,16 +368,18 @@ class App extends Component {
                         profilePic : `https://img.pokemondb.net/artwork/${name}.jpg`,
 
 
-                      sprites:{
-                          back_default: pokemonData.sprites.back_default,
-                          back_shiny:pokemonData.sprites.back_shiny,
-                          front_default: pokemonData.sprites.front_default,
-                          front_shiny: pokemonData.sprites.front_shiny,
-                          },
+                      sprites: spritesList
+                      // {
+                      //     back_default: pokemonData.sprites.back_default,
+                      //     back_shiny:pokemonData.sprites.back_shiny,
+                      //     front_default: pokemonData.sprites.front_default,
+                      //     front_shiny: pokemonData.sprites.front_shiny,
+                      // },
+                      ,
 
-                      types : [pokemonData.types.map(e=>{
+                      types : pokemonData.types.map(e=>{
                         return e.type.name
-                      })],
+                      }),
 
                       stats : pokemonData.stats.map(e=>{
                          return [
@@ -497,7 +514,8 @@ test=()=>{
           this.state.modal ? <Modal /> : null
         }
 
-      <Button loadMorePoke={this.loadMore}/>
+{this.state.view === false ? <Button loadMorePoke={this.loadMore}/> : null    }
+      
       </Container>
      </>
     );
