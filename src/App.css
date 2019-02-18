@@ -1,0 +1,13 @@
+.searchDisplay{
+    border: 0.5px solid #8a0000;
+    border-top: 0.5px solid #8a0000;
+    background-color: white;
+    border-radius: 7px;
+    color: blue;
+    font-weight: 600;
+    font-family: "Share Tech Mono", sans-serif;
+}
+
+.backgroundColor{
+    background-color: #8a0000;
+}
