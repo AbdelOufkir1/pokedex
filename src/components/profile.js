@@ -2,6 +2,8 @@ import React from 'react';
 import './profile.css';
 import ModalExample from './modal';
 import HomeButton from './homeButton';
+import tags from './tag'
+import { UncontrolledTooltip } from 'reactstrap'
 
 
 
@@ -22,7 +24,7 @@ const Profile = (props) => {
             <div className="row justify-content-end">
                 <div className='goRight'>
                     <div className="col">
-                        <b> {props.pokemonClicked.id < 10 ? `#00${props.pokemonClicked.id}` : props.pokemonClicked.id > 99 ? `#${props.pokemonClicked.id}` : `0${props.pokemonClicked.id}`}-{props.pokemonClicked.name}</b>
+                        <b> {props.pokemonClicked.id < 10 ? `#00${props.pokemonClicked.id}` : props.pokemonClicked.id > 99 ? `#${props.pokemonClicked.id}` : `#0${props.pokemonClicked.id}`}-{props.pokemonClicked.name}</b>
                     </div>
                 </div>
             </div>
@@ -34,8 +36,13 @@ const Profile = (props) => {
                         </div>
 
                         <div className="row">
-                            <button type="button" className="btn btn-primary btn-lg active m-3 px-4">Grass</button>
-                            <button type="button" className="btn btn-primary btn-lg active m-3 px-4">Poison</button>
+                            {props.pokemonClicked.types.map((e, i) => {
+                                console.log('tag', tags[`${e}`])
+                                return <button type="button" style={{ 'backgroundColor': tags[e] }} className="btn btn-outline-dark btn-lg active m-3 px-4" key={i}>{e}</button>
+
+
+                            })
+                            }
                         </div>
 
                     </div>
@@ -43,18 +50,21 @@ const Profile = (props) => {
                     <div className="col-7 justify-content-end">
                         <div className="row withMargin"></div>
                         <div className="row withMargin">
-                            <div className="col-3">
-                                <img src={props.pokemonClicked.sprites.back_default} alt="Bulbasaur" />
-                            </div>
-                            <div className="col-3">
-                                <img src={props.pokemonClicked.sprites.back_shiny} alt="Bulbasaur" />
-                            </div>
-                            <div className="col-3">
-                                <img src={props.pokemonClicked.sprites.front_default} alt="Bulbasaur" />
-                            </div>
-                            <div className="col-3">
-                                <img src={props.pokemonClicked.sprites.front_shiny} alt="Bulbasaur" />
-                            </div>
+                            {props.pokemonClicked.sprites.map((e, i) => {
+
+
+                                console.log('help', e)
+                                return e.url !== 'null' ? <div className="col-3" key={i}>
+                                    <div><img src={e.url} id={`UncontrolledTooltipExample${i}`} alt={e.name} /><span style={{ textDecoration: "underline", color: "blue" }} href="#" ></span></div>
+                                    <UncontrolledTooltip placement="right" target={`UncontrolledTooltipExample${i}`}>
+                                        {e.name}
+                                    </UncontrolledTooltip>
+
+                                </div> : null
+
+
+                            })}
+
                         </div>
                         <div className="row withMargin"></div>
                     </div>

@@ -88,25 +88,27 @@ class App extends Component {
 
   toProfile = (name) => {
     const profileArr = []
-    console.log("hi",name)
     return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
       .then((response) => {
-        console.log('this is response', response)
         const pokemonData = response.data
+
+        console.log('this is response',response.data.sprites.back_female)
+        const spritesKeys = Object.keys(pokemonData.sprites)
+        const spritesList = spritesKeys.map((e,i)=>{
+            return { name : `${e}` , 
+                       url : `${response.data.sprites[e]}` }
+
+        })
+          console.log('spriteslist',spritesList)
         profileArr.push(
           {
             name: response.data.name,
             id: response.data.id,
             profilePic: `https://img.pokemondb.net/artwork/${name}.jpg`,
-            sprites: {
-              back_default: pokemonData.sprites.back_default,
-              back_shiny: pokemonData.sprites.back_shiny,
-              front_default: pokemonData.sprites.front_default,
-              front_shiny: pokemonData.sprites.front_shiny,
-            },
-            types: [pokemonData.types.map(e => {
+            sprites: spritesList,
+            types: pokemonData.types.map(e => {
               return e.type.name
-            })],
+            }),
             stats: pokemonData.stats.map(e => {
               return [
                 e.stat.name,
