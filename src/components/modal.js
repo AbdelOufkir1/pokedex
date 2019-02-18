@@ -53,14 +53,12 @@ class ModalExample extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}></ModalHeader>
           <ModalBody>
-              <h2>{this.state.name}</h2>
-              <h2>type : {this.state.type}</h2>
-              <h2>power: {this.state.power}</h2>
-              <h2>pp   :{this.state.pp}</h2>
+              <h2 className="edit">{this.state.name}</h2>
+              <h2 className="edit">type : {this.state.type}</h2>
+              <h2 className="edit">power: {this.state.power}</h2>
+              <h2 className="edit">pp   :{this.state.pp}</h2>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
         </>

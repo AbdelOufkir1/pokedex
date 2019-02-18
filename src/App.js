@@ -108,10 +108,10 @@ class App extends Component {
               return e.type.name
             })],
             stats: pokemonData.stats.map(e => {
-              return {
-                statName: e.stat.name,
-                baseStat: e.base_stat,
-              }
+              return [
+                e.stat.name,
+                e.base_stat,
+              ]
             }),
             moves: pokemonData.moves.map(e => {
               return [
@@ -202,7 +202,7 @@ class App extends Component {
             {this.state.view === false ? this.state.pokemon.map((e, i) => {
               return <Card key={i} pokeData={e} profile={this.toProfile} />
 
-            }) : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState={this.state.show} modal={this.modal} home={this.homeLink} />
+            }) : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState={this.state.show} modal={this.modal} click={this.homeLink} />
             }
             {
               this.state.view===false ? <Buttons loadMorePoke={this.loadMore} /> :null
