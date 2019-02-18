@@ -8,7 +8,7 @@ const Card = (props) => {
              <div className="card" onClick={e=>props.profile(props.pokeData.name)}>
                 <div className="holder">
                     <div className="col col-3">
-                       <img src={props.pokeData.icon} alt="" /> 
+                       <img src={props.pokeData.icon} alt='../assets/headerImage.png' /> 
                     </div>
                     <div className="col col-6">
                         {props.pokeData.name}                        

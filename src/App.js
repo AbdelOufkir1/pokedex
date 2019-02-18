@@ -28,6 +28,7 @@ class App extends Component {
       modal: false,
       searchbar: Pokelist,
       display: [],
+      load: true,
     }
   }
 
@@ -43,7 +44,8 @@ class App extends Component {
   }
 
   loadMore = () => {
-    const next = this.state.pokemon.length + 1
+    const next = this.state.pokemon.length + 1;
+    
     return axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${next}&limit=20`)
       .then((response) => {
 
@@ -167,11 +169,27 @@ class App extends Component {
     this.toProfile(e.target.innerHTML.toLowerCase());
   }
 
+  handleOnScroll = () => {
+
+    const scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+    const scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight || window.innerHeight;
+    const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+
+
+    if (scrolledToBottom) {
+      setTimeout(this.loadMore(), 3000 )
+    }
+  }
+
 
   componentDidMount() {
     this.pagination().then(() => {
       console.log(this.state.pokemon)
     });
+  
+   window.addEventListener('scroll', this.handleOnScroll); 
+
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -207,7 +225,7 @@ class App extends Component {
             }) : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState={this.state.show} modal={this.modal} click={this.homeLink} />
             }
             {
-              this.state.view===false ? <Buttons loadMorePoke={this.loadMore} /> :null
+              this.state.view===false  ? <Buttons loadMorePoke={this.loadMore} /> : null 
             }
             {
               this.state.modal ? <Modal /> : null

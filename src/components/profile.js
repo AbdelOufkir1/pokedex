@@ -107,7 +107,7 @@ const Profile = (props) => {
                             {
                                 props.pokemonClicked.moves.map((e, i) => {
                                     console.log(e[1], i)
-                                    return <ModalExample name={e[0]} url={e[1]} key={i} />
+                                    return <ModalExample pokeName={props.pokemonClicked.name} name={e[0]} url={e[1]} key={i} />
                                 })
                             }
                         </div>
