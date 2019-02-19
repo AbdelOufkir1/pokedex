@@ -28,8 +28,8 @@ class ModalExample extends React.Component {
   
       if(this.state.modal === false){
         axios.get(`${url}`).then((response)=>{
-          console.log('toggle axios data: ', response)
-          console.log(url)
+          // console.log('toggle axios data: ', response)
+          // console.log(url)
           this.setState({
               modal: !this.state.modal,
               name: response.data.name,
@@ -54,7 +54,7 @@ class ModalExample extends React.Component {
               this.setState({
                 image: (this.image || []).concat(img)
               })
-              console.log('stateofModal: ', this.state)
+              // console.log('stateofModal: ', this.state)
             })
 
         }).catch(
@@ -83,7 +83,7 @@ class ModalExample extends React.Component {
               <h2 className="edit">type : {this.state.type}</h2>
               <h2 className="edit">power: {this.state.power}</h2>
               <h2 className="edit">pp   :{this.state.pp}</h2>
-              <Image className="imgModal" src={this.state.image[Math.floor((Math.random() * 25))]} fluid/>
+              <Image className="imgModal" src={this.state.image[Math.floor((Math.random() * this.state.image.length-1))]} fluid/>
           </ModalBody>
           <ModalFooter>
           </ModalFooter>

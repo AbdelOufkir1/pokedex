@@ -37,7 +37,7 @@ const Profile = (props) => {
 
                         <div className="row">
                             {props.pokemonClicked.types.map((e, i) => {
-                                console.log('tag', tags[`${e}`])
+                                // console.log('tag', tags[`${e}`])
                                 return <button type="button" style={{ 'backgroundColor': tags[e] }} className="btn btn-outline-dark btn-lg active m-3 px-4" key={i}>{e}</button>
 
 
@@ -53,7 +53,7 @@ const Profile = (props) => {
                             {props.pokemonClicked.sprites.map((e, i) => {
 
 
-                                console.log('help', e)
+                                // console.log('help', e)
                                 return e.url !== 'null' ? <div className="col-3" key={i}>
                                     <div><img src={e.url} id={`UncontrolledTooltipExample${i}`} alt={e.name} /><span style={{ textDecoration: "underline", color: "blue" }} href="#" ></span></div>
                                     <UncontrolledTooltip placement="right" target={`UncontrolledTooltipExample${i}`}>
@@ -106,7 +106,7 @@ const Profile = (props) => {
                         <div className='col-12'>
                             {
                                 props.pokemonClicked.moves.map((e, i) => {
-                                    console.log(e[1], i)
+                                    // console.log(e[1], i)
                                     return <ModalExample pokeName={props.pokemonClicked.name} name={e[0]} url={e[1]} key={i} />
                                 })
                             }
