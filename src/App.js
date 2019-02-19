@@ -44,6 +44,10 @@ class App extends Component {
   }
 
   loadMore = () => {
+    const soundObject = new Audio(require('./assets/pokemon-gotta-catch-em-all-lyrics-_audiotrimmer.com_.mp3'));
+    soundObject.play();
+    
+
     const next = this.state.pokemon.length + 1;
     
     return axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${next}&limit=20`)
@@ -94,14 +98,14 @@ class App extends Component {
       .then((response) => {
         const pokemonData = response.data
 
-        console.log('this is response',response.data.sprites.back_female)
+        // console.log('this is response',response.data.sprites.back_female)
         const spritesKeys = Object.keys(pokemonData.sprites)
         const spritesList = spritesKeys.map((e,i)=>{
             return { name : `${e}` , 
                        url : `${response.data.sprites[e]}` }
 
         })
-          console.log('spriteslist',spritesList)
+          // console.log('spriteslist',spritesList)
         profileArr.push(
           {
             name: response.data.name,
@@ -131,7 +135,7 @@ class App extends Component {
           this.setState({
             pokemonChosenIdx: this.state.pokemonProfile.length - 1
           })
-          console.log(this.state)
+          // console.log(this.state)
         })
 
       })
@@ -177,7 +181,7 @@ class App extends Component {
     const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
 
 
-    if (scrolledToBottom) {
+    if (scrolledToBottom && this.state.view === false) {
       setTimeout(this.loadMore(), 3000 )
     }
   }
@@ -185,7 +189,7 @@ class App extends Component {
 
   componentDidMount() {
     this.pagination().then(() => {
-      console.log(this.state.pokemon)
+      // console.log(this.state.pokemon)
     });
   
    window.addEventListener('scroll', this.handleOnScroll); 
@@ -194,8 +198,8 @@ class App extends Component {
 
   componentDidUpdate(prevState, prevProps) {
 
-    console.log('updated', prevState)
-    console.log('stateNow', this.state)
+    // console.log('updated', prevState)
+    // console.log('stateNow', this.state)
 
   }
 
