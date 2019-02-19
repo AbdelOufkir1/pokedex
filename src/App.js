@@ -44,6 +44,8 @@ class App extends Component {
   }
 
   loadMore = () => {
+    const soundObject = new Audio(require('./pokemon-gotta-catch-em-all-lyrics-[AudioTrimmer.com].mp3'));
+    soundObject.play();
     const next = this.state.pokemon.length + 1;
     
     return axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${next}&limit=20`)
@@ -177,8 +179,9 @@ class App extends Component {
     const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
 
 
-    if (scrolledToBottom) {
-      setTimeout(this.loadMore(), 3000 )
+    if (scrolledToBottom && this.state.view===false) {
+      // setTimeout(this.loadMore(), 3000 )
+      this.loadMore()
     }
   }
 
@@ -187,9 +190,8 @@ class App extends Component {
     this.pagination().then(() => {
       console.log(this.state.pokemon)
     });
-  
    window.addEventListener('scroll', this.handleOnScroll); 
-
+  
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -211,7 +213,7 @@ class App extends Component {
             <div className="col">
               <div className="container searchDisplay">
                 {this.state.display.slice(0, 5).map((e, i) => {
-                  return <Dropdown click={this.handleDropdownClick} name={e} />
+                return <Dropdown click={this.handleDropdownClick} name={e} /> 
                 })
                 }
               </div>
@@ -225,7 +227,7 @@ class App extends Component {
             }) : <Profile pokemonClicked={this.state.pokemonProfile[this.state.pokemonChosenIdx]} showState={this.state.show} modal={this.modal} click={this.homeLink} />
             }
             {
-              this.state.view===false  ? <Buttons loadMorePoke={this.loadMore} /> : null 
+              this.state.view === false ?<Buttons loadMorePoke={this.loadMore} /> : null
             }
             {
               this.state.modal ? <Modal /> : null
